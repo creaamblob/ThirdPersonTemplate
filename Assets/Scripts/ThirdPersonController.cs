@@ -60,6 +60,7 @@ public class ThirdPersonController : MonoBehaviour
         if (context.performed && controller.isGrounded)
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            animator.SetTrigger("jump");
         }
     }
 
