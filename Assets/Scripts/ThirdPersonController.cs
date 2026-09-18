@@ -1,4 +1,7 @@
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class ThirdPersonController : MonoBehaviour
@@ -18,6 +21,8 @@ public class ThirdPersonController : MonoBehaviour
     private Vector2 lookInput;
 
     private float verticalVelocity;
+    public Animator animator;
+
 
     private void Awake()
     {
@@ -29,10 +34,19 @@ public class ThirdPersonController : MonoBehaviour
         HandleMovement();
     }
 
+  
     // Called by the Input System
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+             if(context.performed)
+        {
+            animator.SetBool("move",true);
+        }
+        else
+        {
+            animator.SetBool("move",false);
+        }
     }
 
     // Called by the Input System
@@ -78,7 +92,9 @@ public class ThirdPersonController : MonoBehaviour
 
         // Move player
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
-
+  
+        
+        
         // Rotate player toward movement direction
         if (moveDirection.magnitude > 0.1f)
         {
