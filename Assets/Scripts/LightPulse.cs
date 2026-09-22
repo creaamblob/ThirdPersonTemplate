@@ -11,13 +11,13 @@ public class LightPulse : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        float pulse = 1f + (float)Math.Sin(Time.time * PulseFreq) * 0.375f;
+        float sine = (float)Math.Sin(Time.time * PulseFreq);
+        float pulse = 0.5f + sine * 0.175f;
         
         if (vol.TryGet(out Bloom bloom)) {
             bloom.intensity.value = pulse;
